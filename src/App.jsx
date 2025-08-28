@@ -1,4 +1,4 @@
-import Form from "./Form"
+import Fetch from "./use_effect_practice/Fetch"
 
 
 const App = () => {
@@ -26,7 +26,8 @@ const App = () => {
   //   </footer>
   //  </div>  // state task
 <div>
-  <Form/>
+  
+  <Fetch/>
 </div>
 
   )
