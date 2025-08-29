@@ -83,8 +83,9 @@ const Fetch = () => {
           className="p-1.5 rounded border-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all duration-200 shadow-sm bg-white"
           onChange={(e)=>{setBrand(e.target.value)}}
           value={brand}
-      >
-          <option >
+        disabled={loader}
+     >
+          <option value='' >
             Select the category
           </option>{brandOption.map((bran)=>(
             <option value={bran} key={bran}>{bran}</option>
@@ -97,7 +98,8 @@ const Fetch = () => {
           id=""
           className="p-1.5 rounded border-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all duration-200 shadow-sm bg-white"
            onChange={(e)=>{setPrice(e.target.value)}}
-       >
+        disabled={loader}
+      >
           <option value="" selected >
             Price
           </option>
@@ -129,7 +131,7 @@ const Fetch = () => {
                   <h3 className="text-xs text-gray-500 mt-2 uppercase">
                     {item.category}
                   </h3>
-                  <p className="font-bold bg-green-400 w-fit px-1 my-1 rounded hover:bg-green-600">${item.price}</p>
+                  <p className="font-semi-bold bg-amber-400 w-fit px-2 py-1 my-1 rounded hover:bg-amber-600">${item.price}</p>
                   <button className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded">
                     Add to Cart
                   </button>
