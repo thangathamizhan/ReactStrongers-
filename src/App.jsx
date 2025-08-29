@@ -1,5 +1,4 @@
-import Fetch from "./use_effect_practice/Fetch"
-
+import UsersData from "./UsersData"
 
 const App = () => {
   return (
@@ -25,11 +24,9 @@ const App = () => {
   //     <p>React Learning Platform © 2023</p>
   //   </footer>
   //  </div>  // state task
-<div>
-  
-  <Fetch/>
-</div>
+  <UsersData/>
 
+    //  <SkeleCard/>
   )
 }
 
