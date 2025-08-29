@@ -27,7 +27,6 @@ const Fetch = () => {
         const res = await fetch("https://dummyjson.com/products");
         const data = await res.json();
         setProduct(data.products);
-        setAllProducts(data.products);
       } catch (err) {
         console.log("something wrong", err);
       } finally {
@@ -41,9 +40,29 @@ const Fetch = () => {
 
     console.log(searchItem);
   };
-  let filteredProduct = product.filter((data) =>
-    data.title.toLowerCase().includes(searchItem.trim().toLowerCase())
-  );
+
+  let filteredProduct =product
+  console.log(filteredProduct);
+ const brandOption =Array.from(new Set(product.map((prod)=>prod.brand))).filter(Boolean)
+ console.log("brands",brandOption);
+
+ if(!loader){
+   filteredProduct=filteredProduct.filter((prod)=>prod.title.toLowerCase().includes(searchItem.toLowerCase()))
+ }
+ if(brand){
+    filteredProduct=filteredProduct.filter((prod)=>prod.brand===brand)
+ }
+ if(price=="low"){
+  filteredProduct=filteredProduct.sort((a,b)=>a.price-b.price)
+
+ }else if(price=="high"){
+  filteredProduct=filteredProduct.sort((a,b)=>b.price-a.price)
+
+ }
+ 
+
+  
+
 
   return (
     <section className="bg-gray-100 min-h-screen p-2 ">
@@ -62,20 +81,24 @@ const Fetch = () => {
           name=""
           id=""
           className="p-1.5 rounded border-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all duration-200 shadow-sm bg-white"
-        >
-          <option value=""  disabled>
+          onChange={(e)=>{setBrand(e.target.value)}}
+          value={brand}
+      >
+          <option >
             Select the category
-          </option>
-          <option value="beauty">Beauty</option>
-          <option value="red">Red</option>
+          </option>{brandOption.map((bran)=>(
+            <option value={bran} key={bran}>{bran}</option>
+          ))}
+          
         </select>
 
         <select
           name=""
           id=""
           className="p-1.5 rounded border-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-all duration-200 shadow-sm bg-white"
-        >
-          <option value="" disabled>
+           onChange={(e)=>{setPrice(e.target.value)}}
+       >
+          <option value="" selected >
             Price
           </option>
           <option value="low">Low</option>
@@ -106,6 +129,7 @@ const Fetch = () => {
                   <h3 className="text-xs text-gray-500 mt-2 uppercase">
                     {item.category}
                   </h3>
+                  <p className="font-bold bg-green-400 w-fit px-1 my-1 rounded hover:bg-green-600">${item.price}</p>
                   <button className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded">
                     Add to Cart
                   </button>
